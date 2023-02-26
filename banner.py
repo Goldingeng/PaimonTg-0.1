@@ -2,6 +2,7 @@ from datetime import datetime
 import sqlite3
 import random
 
+
 class Banner:
     def banner_day(self):
         with sqlite3.connect("bd\db", check_same_thread=False) as conn:
