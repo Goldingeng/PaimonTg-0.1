@@ -4,6 +4,7 @@ import telebot
 from datetime import datetime
 import sqlite3
 import traceback
+import random
 
 bot = ("5409304847:AAGtNYiN8p_GtHzvYZLQB6S6oGG2sMAwHv0")
 client = telebot.TeleBot(token = bot)
