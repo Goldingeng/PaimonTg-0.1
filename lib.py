@@ -5,7 +5,7 @@ import sqlite3
 
 #Проверка зареган ли пользователь
 def is_user_registered(user_id):
-    with sqlite3.connect("bd\db", check_same_thread=False) as conn:
+    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT user_id FROM users WHERE user_id=?", (user_id,))
         result = cursor.fetchone()
@@ -13,7 +13,7 @@ def is_user_registered(user_id):
 
 #Регестрация
 def db_table_val(user_id, user_name):
-    with sqlite3.connect("bd\db", check_same_thread=False) as conn:
+    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute("INSERT INTO users (user_id, user_name, wallet, guarantee, hystory, time) VALUES (?, ?, ?, ?, ?, ?)", (user_id, user_name, 1600, 0, 1, datetime.datetime.now().hour))
         cursor.execute("INSERT INTO characters (Albedo, Al_Haytham, Ayaka, Ayato, Venti, Gan_Yu, Genie, Dilyuk, Ye_Lan, Yaimiya, Itto, Kadzuha, Klee, Kokomi, Ke_Qing, Mona, Nahida, Nile, Raiden, Sayno, Wanderer, Xiao, Tartaglia, Tignari, Hu_Tao, Cee_Cee, ZhongLi, Shen_He, Eola, Yae_Miko, user_id_characters) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, user_id,))
@@ -21,14 +21,14 @@ def db_table_val(user_id, user_name):
 
 #Смена ника
 def name(us_name, us_id):
-    with sqlite3.connect("bd\db", check_same_thread=False) as conn:
+    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute("UPDATE users SET user_name = ? WHERE user_id = ?", (us_name, us_id))
 
 #Полчение данных об аккаунте
 def acc(us_id):
     emoji = ["🤡","😎","👹","😄","🙄","😯","😵‍💫","🥸","🤭","🤥","👿","👽","👻","🤖","💀","🤬","🤪","😮‍💨","😦","😜","😏","🤨","😑","🙂","🥰","😁",'🤔']
-    with sqlite3.connect("bd\db", check_same_thread=False) as conn:
+    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute(f"SELECT * FROM characters WHERE user_id_characters = {us_id}")
         columns = [desc[0] for desc in cursor.description]
@@ -74,7 +74,7 @@ def send_account_info(account_info, characters=""):
 
 #Пополнение кошелька
 def add_to_wallet(user_id):
-    with sqlite3.connect("bd\db", check_same_thread=False) as conn:
+    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
         cursor = conn.cursor()
         
 
