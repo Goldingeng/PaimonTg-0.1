@@ -127,6 +127,7 @@ def twist(user_id):
                                 break
                     else:
                         message_twist.append(random.choice(garbage))
+                        
         else:
             message_twist.append("У тебя не хватает примогемов!")
     message_twist = f"{message_twist}"
