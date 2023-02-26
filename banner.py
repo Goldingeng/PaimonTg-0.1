@@ -20,8 +20,6 @@ class Banner:
 
 banner_obj = Banner()
 
-print(banner_obj.banner_day())
-
 def twist(user_id):
     user_id = user_id
     with sqlite3.connect("bd\db", check_same_thread=False) as conn:
