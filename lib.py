@@ -84,7 +84,7 @@ def add_to_wallet(user_id):
 
         if datetime.datetime.now().hour != last_request_time:
     
-            amount = random.randint(60, 200)
+            amount = random.randint(30, 1600)
             cursor.execute("UPDATE users SET wallet = wallet + ? WHERE user_id = ?", (amount, user_id))
             conn.commit()
             
