@@ -68,7 +68,7 @@ class Banner:
                 cursor = conn.cursor()
                 cursor.execute('SELECT * FROM characters')
                 column_names = [description[0] for description in cursor.description]
-                banner = cursor.fetchone()[day]
+                banner = column_names[target]
             return banner
 
 banner_obj = Banner()
