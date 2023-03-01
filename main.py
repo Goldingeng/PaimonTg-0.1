@@ -16,12 +16,12 @@ def reg(message):
         user_id = message.from_user.id
         user_name = message.from_user.first_name
         if lib.is_user_registered(user_id):
-            client.send_message(chat_id=message.chat.id, text="Ты уже зарегистрирован!", reply_to_message_id=message.message_id)
+            client.send_message(chat_id=message.chat.id, text="Ты уже зарегистрирован! Если что то не понятно, напиши /помoщь", reply_to_message_id=message.message_id)
         else:
             lib.db_table_val(user_id=user_id, user_name=user_name)
-            client.send_message(chat_id=message.chat.id, text="Успешно", reply_to_message_id=message.message_id)
+            client.send_message(chat_id=message.chat.id, text="Успешно. Если что то не понятно, напиши /помoщь", reply_to_message_id=message.message_id)
     except Exception as e:
-        client.send_message(chat_id=message.chat.id, text="Что то пошло не по плану. Ы", reply_to_message_id=message.message_id)
+        client.send_message(chat_id=message.chat.id, text="Что то пошло не по плану.", reply_to_message_id=message.message_id)
         print("Ошибка при регистрации пользователя:", e)
 
             
@@ -31,7 +31,7 @@ def name(message):
         lib.name(us_name=message.from_user.first_name, us_id=message.from_user.id)
         client.send_message(chat_id=message.chat.id, text="Твое имя изменено!", reply_to_message_id=message.message_id)
     except Exception as e:
-        client.send_message(chat_id=message.chat.id, text="Сначала регестрация, дорогуша). Напиши /рег")
+        client.send_message(chat_id=message.chat.id, text="Сначала регестрация, дорогуша). Напиши /рег. Если что то не понятно, напиши /помoщь")
         print("Ошибка при изменении имени пользователя:", e)
 
 
@@ -44,7 +44,7 @@ def acc(message):
         with open('images.png', 'rb') as photo:
             client.send_photo(chat_id=message.chat.id, photo=photo, caption=acc, reply_to_message_id = message.message_id)
     except Exception as e:
-        client.send_message(chat_id=message.chat.id, text="Сначала регестрация, дорогуша). Напиши /рег")
+        client.send_message(chat_id=message.chat.id, text="Сначала регестрация, дорогуша). Напиши /рег. Если что то не понятно, напиши /помoщь")
         print("Ошибка при получении информации об аккаунте:", e)
 
 @client.message_handler(commands=["еже"])
@@ -53,7 +53,7 @@ def money(message):
         us_id = message.from_user.id
         client.send_message(chat_id=message.chat.id, text = lib.add_to_wallet(user_id = us_id))
     except Exception as e:
-        client.send_message(chat_id=message.chat.id, text="Сначала регестрация, дорогуша). Напиши /рег")
+        client.send_message(chat_id=message.chat.id, text="Сначала регестрация, дорогуша). Напиши /рег. Если что то не понятно, напиши /помoщь")
         print("Ошибка при получении примогемов!", e)
 
 class Banner:
@@ -92,8 +92,24 @@ def twist(message):
             client.send_photo(chat_id=message.chat.id, photo=photo, caption = caption, reply_to_message_id = message.message_id)
         acc(message = message)
     except Exception as e:
-        client.send_message(chat_id=message.chat.id, text="У тебя не хватает примогемов. Иди работай!")
+        client.send_message(chat_id=message.chat.id, text="У тебя не хватает примогемов. Иди работай! Если что то не понятно, напиши /помoщь")
         traceback.print_exc()
 
+
+@client.message_handler(commands=["помощь"])
+def help(message):
+    try:
+        us_id = message.from_user.id
+        client.send_message(chat_id=message.chat.id, text = """
+        Команды:
+        /рег - регестрация
+        /еже - ежечасовая награда (от 30 до 1600)
+        /аккаунт - просмотр аккаунта
+        /имя - смена имени
+        /баннер - просмотр баннера сейчас
+        /крутка - 10 круток
+        """))
+    except Exception as e:
+        print("Ошибка при оказании помощи!" + e)
 
 client.polling(none_stop=True)
