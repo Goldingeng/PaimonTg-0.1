@@ -77,8 +77,7 @@ banner_obj = Banner()
 def banner2(message):
     try:
         banner_data = banner_obj.banner_day()
-        banner = banner_data[0]
-        banner_name = banner_data[1]
+        banner_name = banner_data
         client.send_message(chat_id=message.chat.id, text = banner_name, reply_to_message_id = message.message_id)
     except Exception as e:
         print("Ошибка при получении баннера", e)
