@@ -69,9 +69,7 @@ class Banner:
                 cursor.execute('SELECT * FROM characters')
                 column_names = [description[0] for description in cursor.description]
                 banner = column_names[day]
-            with open(f"/root/qwerty/banner/{target}.jpg", 'rb') as photo:
-                photo_data = photo.read()
-            return photo_data, banner
+            return banner
 
 banner_obj = Banner()
 
