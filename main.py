@@ -58,7 +58,7 @@ def money(message):
 
 class Banner:
     def banner_day(self):
-        with sqlite3.connect("bd\db", check_same_thread=False) as conn:
+        with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
             day = datetime.now().day
             error_day = [8, 9, 16, 17, 25, 27, 31]
             if day in error_day:
