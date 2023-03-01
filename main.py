@@ -88,13 +88,12 @@ def twist(message):
         user_id = message.from_user.id
         with open('banner1.jpg', 'rb') as photo:
             spisok = banner.twist(user_id)
-            text = '\n'.join(spisok)
-            client.send_photo(chat_id=message.chat.id, photo=photo, caption = f"👉{text}👻", reply_to_message_id=message.message_id)
-        acc(message=message)
+            caption = "".join(spisok)
+            client.send_photo(chat_id=message.chat.id, photo=photo, caption = caption, reply_to_message_id = message.message_id)
+        acc(message = message)
     except Exception as e:
-        client.send_message(chat_id=message.chat.id, text="У тебя не хватает примогемов. Иди работай! Если что-то не понятно, напиши /помощь")
+        client.send_message(chat_id=message.chat.id, text="У тебя не хватает примогемов. Иди работай! Если что то не понятно, напиши /помoщь")
         traceback.print_exc()
-
 
 @client.message_handler(commands=["помощь"])
 def help(message):
