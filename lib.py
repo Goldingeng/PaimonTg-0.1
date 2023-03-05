@@ -2,10 +2,13 @@ import random
 import datetime
 import sqlite3
 
+db = "bd\db"
+db_server = "/root/qwerty/bd/db"
 
 #Проверка зареган ли пользователь
 def is_user_registered(user_id):
-    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
+    global db
+    with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT user_id FROM users WHERE user_id=?", (user_id,))
         result = cursor.fetchone()
@@ -13,22 +16,25 @@ def is_user_registered(user_id):
 
 #Регестрация
 def db_table_val(user_id, user_name):
-    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
+    global db
+    with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO users (user_id, user_name, wallet, guarantee, hystory, time) VALUES (?, ?, ?, ?, ?, ?)", (user_id, user_name, 1600, 0, 1, datetime.datetime.now().hour))
-        cursor.execute("INSERT INTO characters (Albedo, Al_Haytham, Ayaka, Ayato, Venti, Gan_Yu, Genie, Dilyuk, Ye_Lan, Yaimiya, Itto, Kadzuha, Klee, Kokomi, Ke_Qing, Mona, Nahida, Nile, Raiden, Sayno, Wanderer, Xiao, Tartaglia, Tignari, Hu_Tao, Cee_Cee, ZhongLi, Shen_He, Eola, Yae_Miko, user_id_characters) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, user_id,))
+        cursor.execute("INSERT INTO users (user_id, user_name, wallet, guarantee, hystory, time, promo) VALUES (?, ?, ?, ?, ?, ?, ?)", (user_id, user_name, 1600, 0, 1, 25, 1))
+        cursor.execute("INSERT INTO characters (Albedo, Al Haytham, Ayaka, Ayato, Venti, Gan Yu, Jean, Dilyuk, Ye Lan, Yaimiya, Itto, Kadzuha, Klee, Kokomi, Ke Qing, Mona, Nahida, Nile, Raiden, Sayno, Wanderer, Xiao, Tartaglia, Tignari, Hu Tao, Qiqi, ZhongLi, Shen He, Eola, Ya Miko, user_id_characters) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, user_id,))
         conn.commit()
 
 #Смена ника
 def name(us_name, us_id):
-    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
+    global db
+    with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute("UPDATE users SET user_name = ? WHERE user_id = ?", (us_name, us_id))
 
 #Полчение данных об аккаунте
 def acc(us_id):
+    global db
     emoji = ["🤡","😎","👹","😄","🙄","😯","😵‍💫","🥸","🤭","🤥","👿","👽","👻","🤖","💀","🤬","🤪","😮‍💨","😦","😜","😏","🤨","😑","🙂","🥰","😁",'🤔']
-    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
+    with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute(f"SELECT * FROM characters WHERE user_id_characters = {us_id}")
         columns = [desc[0] for desc in cursor.description]
@@ -72,22 +78,23 @@ def send_account_info(account_info, characters=""):
         message_account_info = "Пользователь не найден"
     return message_account_info
 
+
+def promo_status(user_id):
+    global db
+    with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
+        cursor = conn.cursor()
+
 #Пополнение кошелька
 def add_to_wallet(user_id):
-    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
+    global db
+    with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         cursor = conn.cursor()
-        
-
         cursor.execute("SELECT time FROM users WHERE user_id = ?", (user_id,))
         last_request_time = cursor.fetchone()[0]
         
-
         if datetime.datetime.now().hour != last_request_time:
-    
             amount = random.randint(30, 1600)
             cursor.execute("UPDATE users SET wallet = wallet + ? WHERE user_id = ?", (amount, user_id))
-            conn.commit()
-            
             cursor.execute("UPDATE users SET time = ? WHERE user_id = ?", (datetime.datetime.now().hour, user_id))
             conn.commit()
             

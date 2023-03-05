@@ -2,10 +2,12 @@ from datetime import datetime
 import sqlite3
 import random
 
+db = "bd\db"
 
 class Banner:
     def banner_day(self):
-        with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
+        global db
+        with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
             day = datetime.now().day
             error_day = [8, 9, 16, 17, 25, 27, 31]
             if day in error_day:
@@ -21,8 +23,9 @@ class Banner:
 banner_obj = Banner()
 
 def twist(user_id):
+    global db
     user_id = user_id
-    with sqlite3.connect("/root/qwerty/bd/db", check_same_thread=False) as conn:
+    with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         message_twist = []
         garbage = ["Парный нефрит", "Посыльный", "Потусторонняя история","Предвестник зари","Рогатка", "Руководство по магии", "Тёмный железный меч", "Филейный нож", "Холодное лезвие", "Чёрная кисть", "Эпос о драконоборцах"]
         cursor = conn.cursor()
