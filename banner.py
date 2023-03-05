@@ -2,7 +2,7 @@ from datetime import datetime
 import sqlite3
 import random
 
-db = "bd\db"
+db = "/root/qwerty/bd/db"
 
 class Banner:
     def banner_day(self):

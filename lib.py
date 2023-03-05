@@ -2,7 +2,7 @@ import random
 import datetime
 import sqlite3
 
-db = "bd\db"
+db = "/root/qwerty/bd/db"
 db_server = "/root/qwerty/bd/db"
 
 #Проверка зареган ли пользователь
@@ -83,6 +83,19 @@ def promo_status(user_id):
     global db
     with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         cursor = conn.cursor()
+        cursor.execute("SELECT promo FROM users WHERE user_id = ?", (user_id,))
+        status_prom = cursor.fetchone()[0]
+        if status_prom == 1:
+            amount = random.randint(1, 5000)
+            cursor.execute("UPDATE users SET wallet = wallet + ? WHERE user_id = ?", (amount, user_id))
+            cursor.execute("UPDATE users SET promo = 0 WHERE user_id = ?", (user_id))
+            conn.commit()
+            answer = f"Успешно! Ты получил: {amount} примогемов!"
+        else:
+            answer = "Халявы не будет."
+        return answer
+
+
 
 #Пополнение кошелька
 def add_to_wallet(user_id):
