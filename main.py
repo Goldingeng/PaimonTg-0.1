@@ -6,7 +6,7 @@ import sqlite3
 import traceback
 import random
 
-db = "bd/db"
+db = "/root/qwerty/bd/db"
 bot = ("5409304847:AAGtNYiN8p_GtHzvYZLQB6S6oGG2sMAwHv0")
 client = telebot.TeleBot(token = bot)
 

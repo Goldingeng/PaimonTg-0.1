@@ -2,7 +2,7 @@ import random
 import datetime
 import sqlite3
 
-db = "bd/db"
+db = "/root/qwerty/bd/db"
 db_server = "/root/qwerty/bd/db"
 
 #Проверка зареган ли пользователь
