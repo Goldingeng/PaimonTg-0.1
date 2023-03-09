@@ -20,7 +20,7 @@ def db_table_val(user_id, user_name):
     with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
         cursor = conn.cursor()
         cursor.execute("INSERT INTO users (user_id, user_name, wallet, guarantee, hystory, time, promo) VALUES (?, ?, ?, ?, ?, ?, ?)", (user_id, user_name, 1600, 0, 1, 25, 1))
-        cursor.execute("INSERT INTO characters (Albedo, Al_Haytham, Ayaka, Ayato, Venti, Gan_Yu, Jean, Dilyuk, Ye_Lan, Yaimiya, Itto, Kadzuha, Klee, Kokomi, Ke_Qing, Mona, Nahida, Nile, Raiden, Sayno, Wanderer, Xiao, Tartaglia, Tignari, Hu_Tao, Qiqi, ZhongLi, Shen_He, Eola, Ya_Miko, user_id_characters) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, user_id,))
+        cursor.execute("INSERT INTO characters (Albedo, Al_Haytham, Ayaka, Ayato, Venti, Gan_Yu, Jean, Dilyuk, Ye_Lan, Yaimiya, Itto, Kadzuha, Klee, Kokomi, Ke_Qing, Mona, Nahida, Nile, Raiden, Sayno, Wanderer, Xiao, Tartaglia, Tignari, Hu_Tao, Qiqi, ZhongLi, Shen_He, Eola, Yae_Miko, user_id_characters) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, user_id,))
         conn.commit()
 
 #Смена ника
