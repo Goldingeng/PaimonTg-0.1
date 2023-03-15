@@ -84,7 +84,9 @@ class Banner:
             day = datetime.now().day
             error_day = [7, 8, 15, 16, 24, 26, 31]
             if day in error_day:
-                banner1 = random.choice([x for x in range(31) if x not in error_day])
+                target = random.choice([x for x in range(31) if x not in error_day])
+                column_names = [description[0] for description in cursor.description]
+                banner1 = column_names[target]
             else:
                 target = day
                 cursor = conn.cursor()
