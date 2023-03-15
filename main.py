@@ -81,21 +81,23 @@ class Banner:
     def banner_day(self):
         global db
         with sqlite3.connect(f"{db}", check_same_thread=False) as conn:
+            cursor = conn.cursor()
             day = datetime.now().day
             error_day = [7, 8, 15, 16, 24, 26, 31]
             if day in error_day:
                 target = random.choice([x for x in range(31) if x not in error_day])
+                cursor.execute('SELECT * FROM characters')
                 column_names = [description[0] for description in cursor.description]
                 banner1 = column_names[target]
             else:
                 target = day
-                cursor = conn.cursor()
                 cursor.execute('SELECT * FROM characters')
                 column_names = [description[0] for description in cursor.description]
                 banner1 = column_names[target]
             return banner1
 
 banner_obj = Banner()
+
 
 @client.message_handler(commands=["баннер"])
 def banner2(message):
