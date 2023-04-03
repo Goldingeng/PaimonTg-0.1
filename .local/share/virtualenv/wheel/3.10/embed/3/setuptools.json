@@ -1,0 +1,31 @@
+{
+  "completed": "2023-03-20T08:47:01.007700Z",
+  "periodic": true,
+  "started": "2023-03-20T08:46:41.819853Z",
+  "versions": [
+    {
+      "filename": "setuptools-67.6.0-py3-none-any.whl",
+      "found_date": "2023-03-20T08:46:42.399363Z",
+      "release_date": "2023-03-08T11:04:58.000000Z",
+      "source": "periodic"
+    },
+    {
+      "filename": "setuptools-67.5.1-py3-none-any.whl",
+      "found_date": "2023-03-20T08:46:51.265378Z",
+      "release_date": "2023-03-06T12:43:46.000000Z",
+      "source": "periodic"
+    },
+    {
+      "filename": "setuptools-67.5.0-py3-none-any.whl",
+      "found_date": "2023-03-20T08:46:55.808240Z",
+      "release_date": "2023-03-05T22:08:41.000000Z",
+      "source": "periodic"
+    },
+    {
+      "filename": "setuptools-67.4.0-py3-none-any.whl",
+      "found_date": "2023-03-20T08:46:58.669039Z",
+      "release_date": "2023-02-21T19:49:41.000000Z",
+      "source": "periodic"
+    }
+  ]
+}
